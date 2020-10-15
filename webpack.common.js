@@ -1,17 +1,18 @@
 const webpack = require("webpack");
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+const OUTPUT_PATH = path.resolve(__dirname, 'public/assets');
+
 module.exports = {
     entry: {
-        "dist": path.resolve(__dirname, 'src/assets/js/app.js') //con il nome "dist" gli dico che l'output voglio che si chiami dist
+        "dist": path.resolve(__dirname, 'src/js/app.js') //con il nome "dist" gli dico che l'output voglio che si chiami dist
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
+        path: OUTPUT_PATH,
     },
     optimization: {
         splitChunks: {
@@ -29,14 +30,11 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 {
-                    context: path.resolve(__dirname, 'src/assets', 'json'),
+                    context: path.resolve(__dirname, 'src', 'json'),
                     from: '**/*',
-                    to: __dirname + 'dist/json'
+                    to: OUTPUT_PATH
                 },
             ],
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/pages/index.html'
         }),
         new webpack.ProvidePlugin({
             $: "jquery",
@@ -65,7 +63,7 @@ module.exports = {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             reloadAll: true,
-                            publicPath: '/',
+                            publicPath: '/assets',
                         },
                     },
                     'css-loader',
