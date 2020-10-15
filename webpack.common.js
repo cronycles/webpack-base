@@ -1,17 +1,22 @@
 const webpack = require("webpack");
-const TerserJSPlugin = require('terser-webpack-plugin');
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/assets/js/app.js',
+    entry: {
+        "dist": path.resolve(__dirname, 'src/assets/js/app.js') //con il nome "dist" gli dico che l'output voglio che si chiami dist
+    },
+    output: {
+        filename: '[name].js',
+        path: path.resolve(__dirname, 'dist'),
+    },
     optimization: {
-        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
         splitChunks: {
             cacheGroups: {
-                vendor: {
+                commons: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
                     chunks: 'all',
@@ -21,10 +26,17 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new CopyPlugin({
+            patterns: [
+                {
+                    context: path.resolve(__dirname, 'src/assets', 'json'),
+                    from: '**/*',
+                    to: __dirname + 'dist/json'
+                },
+            ],
+        }),
         new HtmlWebpackPlugin({
-            title: 'My App',
-            template: './src/pages/index.html',
-            minify: true
+            template: './src/pages/index.html'
         }),
         new webpack.ProvidePlugin({
             $: "jquery",
@@ -53,6 +65,7 @@ module.exports = {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             reloadAll: true,
+                            publicPath: '/',
                         },
                     },
                     'css-loader',
@@ -62,16 +75,27 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 exclude: /node_modules/,
-                use: [
-                    'file-loader',
-                ],
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'images',
+                },
+                
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
                 exclude: /node_modules/,
-                use: [
-                    'file-loader',
-                ],
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'fonts',
+                },
+            },
+            {
+                test: /\.(json)$/,
+                exclude: /node_modules/,
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'json',
+                },
             },
         ],
 
