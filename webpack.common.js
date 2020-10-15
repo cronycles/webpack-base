@@ -32,7 +32,7 @@ module.exports = {
                 {
                     context: path.resolve(__dirname, 'src', 'json'),
                     from: '**/*',
-                    to: OUTPUT_PATH
+                    to: OUTPUT_PATH + '/json'
                 },
             ],
         }),
@@ -85,14 +85,6 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                     outputPath: 'fonts',
-                },
-            },
-            {
-                test: /\.(json)$/,
-                exclude: /node_modules/,
-                loader: 'file-loader',
-                options: {
-                    outputPath: 'json',
                 },
             },
         ],
