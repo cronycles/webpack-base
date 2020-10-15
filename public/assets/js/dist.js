@@ -1,4 +1,5 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/js/app.js":
@@ -10,12 +11,10 @@
 /*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_require__.r, __webpack_exports__, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery_dist_jquery_slim__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery/dist/jquery.slim */ "./node_modules/jquery/dist/jquery.slim.js");
 /* harmony import */ var jquery_dist_jquery_slim__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_dist_jquery_slim__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _clown_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./clown.js */ "./src/js/clown.js");
-/* harmony import */ var _clown_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_clown_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ready_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ready.js */ "./src/js/ready.js");
 
 
 
@@ -26,26 +25,114 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************!*\
   !*** ./src/js/clown.js ***!
   \*************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_require__ */
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ Clown
+/* harmony export */ });
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-var $button = $(".jclown");
-$button.off("click").on("click", () => msg());
+class Clown {
+  constructor() {
+    this.initializeClown();
+  }
 
-function scaryClown() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve('🤡');
-    }, 2000);
-  });
+  initializeClown() {
+    let $button = $(".jclown");
+    $button.off("click").on("click", () => this.msg());
+  }
+
+  async msg() {
+    const msg = await this.scaryClown();
+    console.log('Message:', msg);
+  }
+
+  async scaryClown() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('🤡');
+      }, 2000);
+    });
+  }
+
 }
 
-async function msg() {
-  const msg = await scaryClown();
-  console.log('Message:', msg);
+/***/ }),
+
+/***/ "./src/js/index.js":
+/*!*************************!*\
+  !*** ./src/js/index.js ***!
+  \*************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ IndexPage
+/* harmony export */ });
+/* harmony import */ var _clown_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./clown.js */ "./src/js/clown.js");
+
+class IndexPage {
+  constructor() {
+    new _clown_js__WEBPACK_IMPORTED_MODULE_0__.default();
+  }
+
 }
+
+/***/ }),
+
+/***/ "./src/js/pag2.js":
+/*!************************!*\
+  !*** ./src/js/pag2.js ***!
+  \************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ Pag2Page
+/* harmony export */ });
+/* harmony import */ var _clown_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./clown.js */ "./src/js/clown.js");
+
+class Pag2Page {
+  constructor() {
+    new _clown_js__WEBPACK_IMPORTED_MODULE_0__.default();
+    this.ciao = "ciao";
+  }
+
+}
+
+/***/ }),
+
+/***/ "./src/js/ready.js":
+/*!*************************!*\
+  !*** ./src/js/ready.js ***!
+  \*************************/
+/*! namespace exports */
+/*! exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.js */ "./src/js/index.js");
+/* harmony import */ var _pag2_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pag2.js */ "./src/js/pag2.js");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+
+$(function () {
+  new _index_js__WEBPACK_IMPORTED_MODULE_0__.default();
+  new _pag2_js__WEBPACK_IMPORTED_MODULE_1__.default();
+});
 
 /***/ })
 

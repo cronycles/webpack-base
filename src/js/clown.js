@@ -1,17 +1,30 @@
 
-var $button = $(".jclown");
-$button.off("click").on("click", () => msg())
+export default class Clown {
+  constructor() {
+    this.initializeClown();
+  }
 
+  initializeClown () {
+    let $button = $(".jclown");
+    $button.off("click").on("click", () => this.msg())
+  }
 
-function scaryClown() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve('🤡');
-    }, 2000);
-  });
+  async msg () {
+    const msg = await this.scaryClown();
+    console.log('Message:', msg);
+  }
+
+  async scaryClown () {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('🤡');
+      }, 2000);
+    });
+  }
 }
 
-async function msg() {
-  const msg = await scaryClown();
-  console.log('Message:', msg);
-}
+
+
+
+
+
