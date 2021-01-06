@@ -62,7 +62,6 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            reloadAll: true,
                             publicPath: '/assets',
                         },
                     },
